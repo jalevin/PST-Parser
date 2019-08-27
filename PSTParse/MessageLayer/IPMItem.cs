@@ -1,10 +1,12 @@
-﻿using PSTParse.ListsTablesPropertiesLayer;
+﻿using System;
+using PSTParse.ListsTablesPropertiesLayer;
 
 namespace PSTParse.MessageLayer
 {
     public class IPMItem
     {
         public string MessageClass => PropertyContext.MessageClassProperty;
+        public string GUID;
         protected PropertyContext PropertyContext { get; }
 
         //public IPMItem(PSTFile pst, ulong nid)
@@ -19,4 +21,7 @@ namespace PSTParse.MessageLayer
             //MessageClass = Encoding.Unicode.GetString(PropertyContext.Properties[(MessageProperty)0x1a].Data);
         }
     }
+    
+    
+    
 }

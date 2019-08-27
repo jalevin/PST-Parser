@@ -7,9 +7,10 @@ using PSTParse.NodeDatabaseLayer;
 using PSTParse.Utilities;
 using static PSTParse.Utilities.Utilities;
 
+
 namespace PSTParse.MessageLayer
 {
-    public class Message : IPMItem
+    public class Message : MapiItem
     {
         //private readonly NodeDataDTO _data;
         //private readonly TableContext _attachmentTable;
@@ -18,13 +19,14 @@ namespace PSTParse.MessageLayer
         //private readonly PropertyContext _messagePC;
         private readonly PSTFile _pst;
         private readonly ulong _nid;
-        private Dictionary<ulong, NodeDataDTO> _subNodeDataDtoLazy;
-        private Dictionary<ulong, NodeDataDTO> _subNodeHeaderDataDtoLazy;
         private readonly Lazy<bool> _isRMSEncryptedLazy;
-        private readonly Lazy<bool> _isRMSEncryptedHeadersLazy;
-        private Recipients _recipientsLazy;
-        private List<Attachment> _attachmentsLazy;
-        private IEnumerable<Attachment> _attachmentHeadersLazy;
+        private readonly Lazy<bool> _isRMSEncryptedHeadersLazy; 
+        
+  //      private Dictionary<ulong, NodeDataDTO> _subNodeDataDtoLazy;
+  //      private Dictionary<ulong, NodeDataDTO> _subNodeHeaderDataDtoLazy;
+  //      private Recipients _recipientsLazy;
+  //      private List<Attachment> _attachmentsLazy;
+  //      private IEnumerable<Attachment> _attachmentHeadersLazy;
 
         private Dictionary<ulong, NodeDataDTO> SubNodeDataDto => Lazy(ref _subNodeDataDtoLazy, () => BlockBO.GetSubNodeData(_nid, _pst));
         private Dictionary<ulong, NodeDataDTO> SubNodeHeaderDataDto => Lazy(ref _subNodeHeaderDataDtoLazy, () => BlockBO.GetSubNodeData(_nid, _pst, take: 1));
@@ -66,6 +68,7 @@ namespace PSTParse.MessageLayer
         public String CreatorName { get; set; }
         public uint NonUnicodeCodePage { get; set; }
         public uint MessageFlags { get; set; }
+        
         public Recipients Recipients => Lazy(ref _recipientsLazy, GetRecipients);
         public List<Attachment> Attachments => Lazy(ref _attachmentsLazy, GetAttachments);
         public IEnumerable<Attachment> AttachmentHeaders => Lazy(ref _attachmentHeadersLazy, GetAttachmentHeaders);
@@ -364,18 +367,5 @@ namespace PSTParse.MessageLayer
         }
     }
 
-    public enum Importance
-    {
-        LOW = 0x00,
-        NORMAL = 0x01,
-        HIGH = 0x02
-    }
-
-    public enum Sensitivity
-    {
-        Normal = 0x00,
-        Personal = 0x01,
-        Private = 0x02,
-        Confidential = 0x03
-    }
+ 
 }

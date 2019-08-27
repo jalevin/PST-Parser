@@ -72,6 +72,7 @@
     <Compile Include="ListsTablesPropertiesLayer\TCRowMatrixData.cs" />
     <Compile Include="MessageLayer\Attachment.cs" />
     <Compile Include="MessageLayer\AttachmentEnums.cs" />
+    <Compile Include="MessageLayer\Meeting.cs" />
     <Compile Include="MessageLayer\IPMItem.cs" />
     <Compile Include="MessageLayer\MailFolder.cs" />
     <Compile Include="MessageLayer\MailStore.cs" />
@@ -124,7 +125,9 @@
     <Compile Include="Utilities\RtfDecompressor.cs" />
     <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="MessageLayer\MapiItem.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

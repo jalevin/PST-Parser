@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using PSTParse.ListsTablesPropertiesLayer;
@@ -31,6 +32,17 @@ namespace PSTParse.MessageLayer
         public bool RenderedInBody { get; set; }
         public byte[] Data { get; set; }
 
+        public void SaveToDisk(string path)
+        {
+            if(!Directory.Exists((path)))
+                Directory.CreateDirectory(Path.Combine(path));
+            
+            using (Stream file = File.OpenWrite(Path.Combine(path, DisplayName)))
+            {
+                file.Write(Data, 0, Data.Length);
+            }
+
+        }
         public Attachment(PropertyContext propertyContext) : this(propertyContext?.Properties.Select(d => d.Value)) { }
 
         public Attachment(IEnumerable<ExchangeProperty> exchangeProperties)

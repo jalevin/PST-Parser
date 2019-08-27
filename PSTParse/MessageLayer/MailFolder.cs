@@ -59,13 +59,26 @@ namespace PSTParse
             foreach (var row in ContentsTC.ReverseRowIndex)
             {
                 var propertyContext = GetPropertyContext(row.Value);
-                if (propertyContext.MessageClassProperty == "IPM.Note")
+                switch (propertyContext.MessageClassProperty)
                 {
-                    yield return new Message(_pst, propertyContext);
-                }
-                else
-                {
-                    yield return new IPMItem(_pst, propertyContext);
+                    case "IPM.Note":
+                        yield return new Message(_pst, propertyContext);
+                        break;
+                    case "IPM.Schedule.Meeting.Request":
+                        yield return new Meeting(_pst, propertyContext);
+                        break;
+                    case "IPM.Schedule.Meeting.Resp.Pos":
+                        yield return new Meeting(_pst, propertyContext);
+                        break;
+                    case "IPM.Schedule.Meeting.Notification.Forward":
+                        yield return new Meeting(_pst, propertyContext);
+                        break;
+                    case "IPM.Schedule.Meeting.Canceled":
+                        yield return new Meeting(_pst, propertyContext);
+                        break;
+                    default:
+                        yield return new IPMItem(_pst, propertyContext);
+                        break;
                 }
             }
         }
