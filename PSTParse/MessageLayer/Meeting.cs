@@ -159,7 +159,7 @@ namespace PSTParse.MessageLayer
                         SenderAddressType = Encoding.Unicode.GetString(prop.Value.Data);
                         break;
                     case MessageProperty.Headers:
-                        Headers = Encoding.Unicode.GetString(prop.Value.Data);
+                        InternetHeaders = Encoding.Unicode.GetString(prop.Value.Data);
                         break;
                     case MessageProperty.Importance:
                         Importance = (Importance)BitConverter.ToInt16(prop.Value.Data, 0);

@@ -50,7 +50,6 @@ public class MapiItem : IPMItem
         public Importance Importance { get; set; }
         public Priority Priority { get; set; }
         public Sensitivity Sensitivity { get; set; }
-        public string headers { get; set; }
         public bool Read { get; set; }
         public bool Unsent { get; set; }
         public bool Unmodified { get; set; }
@@ -60,7 +59,7 @@ public class MapiItem : IPMItem
         public bool NotifyReadRequested { get; set; }
         public bool NotifyUnreadRequested { get; set; }
         public bool EverRead { get; set; }
-        public string Headers { get; set; }
+        public string InternetHeaders { get; set; }
         public string BodyPlainText { get; set; }
         public string SubjectPrefix { get; set; }
         public string BodyHtml { get; set; }

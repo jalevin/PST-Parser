@@ -119,12 +119,14 @@ namespace PSTParseApp
                 jsonResolver.IgnoreProperty((typeof(Message)), "AttachmentPC");
                 jsonResolver.IgnoreProperty((typeof(Message)), "RecipientTable");
                 jsonResolver.IgnoreProperty((typeof(Meeting)), "IsRMSEncrypted");
+                jsonResolver.IgnoreProperty((typeof(Meeting)), "IsRMSEncryptedHeaders");
 
-                // Appointments
+                // Meetings 
                 jsonResolver.IgnoreProperty((typeof(Meeting)), "Data");
                 jsonResolver.IgnoreProperty((typeof(Meeting)), "AttachmentPC");
                 jsonResolver.IgnoreProperty((typeof(Meeting)), "RecipientTable");
                 jsonResolver.IgnoreProperty((typeof(Meeting)), "IsRMSEncrypted");
+                jsonResolver.IgnoreProperty((typeof(Meeting)), "IsRMSEncryptedHeaders");
                 
                 // Recipients
                 jsonResolver.IgnoreProperty((typeof(Recipient)), "Tag");

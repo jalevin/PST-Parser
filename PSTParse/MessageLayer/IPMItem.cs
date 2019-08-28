@@ -18,9 +18,12 @@ namespace PSTParse.MessageLayer
         public IPMItem(PSTFile pst, PropertyContext propertyContext)
         {
             PropertyContext = propertyContext;
+            GUID = new Guid().ToString();
             //MessageClass = Encoding.Unicode.GetString(PropertyContext.Properties[(MessageProperty)0x1a].Data);
         }
     }
+    
+    
     
     
     

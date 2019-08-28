@@ -33,7 +33,7 @@ namespace PSTParse.MessageLayer
 
         public string Subject { get; set; }
         public string SubjectPrefix { get; set; }
-        public Importance Imporance { get; set; }
+        public Importance Importance { get; set; }
         public Sensitivity Sensitivity { get; set; }
         public DateTime LastSaved { get; set; }
         public DateTime ClientSubmitTime { get; set; }
@@ -53,7 +53,6 @@ namespace PSTParse.MessageLayer
         public bool NotifyUnreadRequested { get; set; }
         public bool EverRead { get; set; }
         public uint MessageSize { get; set; }
-        public string Headers { get; set; }
         public string BodyPlainText { get; set; }
         public string BodyHtml { get; set; }
         public uint InternetArticleNumber { get; set; }
@@ -93,7 +92,7 @@ namespace PSTParse.MessageLayer
                 switch (prop.Key)
                 {
                     case MessageProperty.Importance:
-                        Imporance = (Importance)BitConverter.ToInt16(prop.Value.Data, 0);
+                        Importance = (Importance)BitConverter.ToInt16(prop.Value.Data, 0);
                         break;
                     case MessageProperty.Sensitivity:
                         Sensitivity = (Sensitivity)BitConverter.ToInt16(prop.Value.Data, 0);
@@ -174,7 +173,7 @@ namespace PSTParse.MessageLayer
                         //trusted sender
                         break;
                     case MessageProperty.Headers:
-                        Headers = Encoding.Unicode.GetString(prop.Value.Data);
+                        InternetHeaders = Encoding.Unicode.GetString(prop.Value.Data);
                         break;
                     case MessageProperty.BodyPlainText:
                         BodyPlainText = Encoding.Unicode.GetString(prop.Value.Data);
@@ -305,6 +304,8 @@ namespace PSTParse.MessageLayer
             var attachmentSet = new HashSet<string>();
             foreach (var subNode in SubNodeDataDto)
             {
+                // fixme start here. this is the node id. If we can figure out that the attachment is embedded
+                // and jump straight to the attachment node id we may have something
                 var nodeType = NID.GetNodeType(subNode.Key);
                 if (nodeType != NID.NodeType.ATTACHMENT_PC) continue;
 
